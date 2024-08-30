@@ -1,48 +1,83 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7;
     margin: 0;
-    padding: 0px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {
-    padding-bottom: 0.5rem;
-    background: #3F51b5;
+    padding: 0.5rem 0;
     width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    position: relative;
+}
+
+header.historia {
+    background-color: #be6af1; /* Morado para Historia */
+}
+
+header.geografia {
+    background-color: #2e7d32; /* Verde para Geografía */
+}
+
+header.arte {
+    background-color: #f57751; /* Naranja para Arte */
 }
 
 footer {
     height: 100px;
-    background: #000;
+    background: #3F51B5;
     width: 100%;
+    max-width: 800px;
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-top: 1rem; /* Añadir padding-top para empujar el texto hacia arriba */
 }
 
 main {
-    justify-content: center;
     display: flex;
-    padding: 2em;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
 }
 
-h2 {}
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
 
 .cardPreguntas {
     background: #fff;
-    padding: 20px;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 320px;
+    margin: 0 1rem;
+    transition: transform 0.2s ease-in-out;
 }
 
-/*para las respuestas correctas o incorrectas creo a
-va a heredar cardPreguntas roja/verde
-*/
-.roja {}
-
-.verde{}
+.cardPreguntas:hover {
+    transform: scale(1.05);
+}
 
 #respuesta {
     display: flex;
@@ -50,44 +85,60 @@ va a heredar cardPreguntas roja/verde
 }
 
 .imglogo {
-    width: 100px;
-    float: left;
-    margin-left: 2em;
+    height: 100%;
+    width: auto;
     position: absolute;
+    top: 0;
+    right: 10px;
 }
-
-.btn{
-    background-color: #007bff;
+.btn {
+    background-color: #007BFF;
     color: white;
-    margin-top: 0.5em;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #0056b3;
 }
 
-.correcto{
-    background-color: #28a745 !important;
+.correcto {
+    background-color: #28A745 !important; /* Verde */
+    color: white !important;
 }
 
-.incorrecto{
-    background-color: #dc3545 !important;
+.incorrecto {
+    background-color: #DC3545 !important; /* Rojo */
+    color: white !important;
 }
 
-#feedback{
-    margin-top: 20px;
-    font-size: 2em;
-    color: white;
+#feedback {
+    margin-top: 0; /* Remover margen superior para asegurar la centralización */
+    font-size: 1.5rem;
+    color: #fff;
     text-align: center;
-    padding-top: 1em;
+    padding: 0; /* Ajuste de padding para centrado vertical */
+    position: absolute;
+    top: 20%; /* Ajustar la posición vertical */
+    left: 50%;
+    transform: translate(-50%, -20%); /* Centrar horizontalmente y ajustar verticalmente */
 }
 
-.numeroPregunta{
+.numeroPregunta {
     text-align: right;
     color: white;
-    display: block;
     font-weight: bold;
-    margin-right: 1em;
+    margin-right: 1rem;
 }
 
-.tituloCategoria{
-    text-align: center;
+.tituloCategoria {
+    font-size: 1.75rem;
     color: white;
-    padding-top: 1em;
+    margin-top: 0.5rem;
+    font-weight: 500;
 }
+
