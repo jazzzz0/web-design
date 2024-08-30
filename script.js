@@ -1,11 +1,16 @@
 function validarRespuesta(estado, respuesta, pregunta) {
-    feedback = "";
-    botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
-    if (estado == 1) {
-        botonRespuestaSeleccionada.classList.add("Correcto");
+    let feedback = "";
+    const botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
+
+    // Limpiar las clases anteriores de todos los botones
+    const botones = document.querySelectorAll("#respuesta button");
+    botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
+
+    if (estado === 1) {
+        botonRespuestaSeleccionada.classList.add("correcto");
         feedback = "Correcto";
     } else {
-        botonRespuestaSeleccionada.classList.add("Incorrecto");
+        botonRespuestaSeleccionada.classList.add("incorrecto");
         feedback = "Incorrecto";
     }
 
@@ -14,8 +19,25 @@ function validarRespuesta(estado, respuesta, pregunta) {
 }
 
 function muestraPreguntaSiguiente(pregunta) {
-    preguntaSiguiente = pregunta + 1;
+    const preguntaSiguiente = pregunta + 1;
     setTimeout(() => {
+        const header = document.getElementById("header");
+        
+        if (preguntaSiguiente === 2) {
+            document.getElementById("tituloCategoria").textContent = "Categoría: Geografía";
+            header.classList.remove("historia", "arte");
+            header.classList.add("geografia");
+        } else if (preguntaSiguiente === 3) {
+            document.getElementById("tituloCategoria").textContent = "Categoría: Arte y Literatura";
+            header.classList.remove("historia", "geografia");
+            header.classList.add("arte");
+        } else if (preguntaSiguiente === 4) {
+            document.getElementById("numeroPregunta").style.display = "none";
+            document.getElementById("tituloCategoria").textContent = "Fin";
+        } else {
+            document.getElementById("numeroPregunta").textContent = "Pregunta número: " + preguntaSiguiente;
+        }
+
         document.getElementById("feedback").textContent = "";
         document.getElementById("pregunta" + pregunta).style.display = "none";
         document.getElementById("pregunta" + preguntaSiguiente).style.display = "block";
