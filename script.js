@@ -2,10 +2,11 @@ function validarRespuesta(estado, respuesta, pregunta) {
     let feedback = "";
     const botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
 
-    // Limpiar las clases anteriores de todos los botones
-    const botones = document.querySelectorAll("#respuesta button");
-    botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
+     // Limpiar las clases anteriores de todos los botones en la pregunta actual
+     const botones = document.querySelectorAll("#pregunta" + pregunta + " .btn");
+     botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
 
+     // Añadir la clase correspondiente al botón seleccionado
     if (estado === 1) {
         botonRespuestaSeleccionada.classList.add("correcto");
         feedback = "Correcto";
