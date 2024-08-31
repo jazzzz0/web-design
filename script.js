@@ -20,8 +20,9 @@ function validarRespuesta(estado, respuesta, pregunta) {
 }
 
 function muestraPreguntaSiguiente(pregunta) {
-    var preguntaSiguiente = pregunta + 1;
     setTimeout(() => {
+        var preguntaSiguiente = pregunta + 1;
+    
         var header = document.getElementById("header");
         
         if (preguntaSiguiente === 2) {
