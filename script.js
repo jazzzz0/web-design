@@ -1,9 +1,9 @@
 function validarRespuesta(estado, respuesta, pregunta) {
     let feedback = "";
-    const botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
+    var botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
 
      // Limpiar las clases anteriores de todos los botones en la pregunta actual
-     const botones = document.querySelectorAll("#pregunta" + pregunta + " .btn");
+     var botones = document.querySelectorAll("#pregunta" + pregunta + " .btn");
      botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
 
      // Añadir la clase correspondiente al botón seleccionado
@@ -20,9 +20,9 @@ function validarRespuesta(estado, respuesta, pregunta) {
 }
 
 function muestraPreguntaSiguiente(pregunta) {
-    const preguntaSiguiente = pregunta + 1;
+    var preguntaSiguiente = pregunta + 1;
     setTimeout(() => {
-        const header = document.getElementById("header");
+        var header = document.getElementById("header");
         
         if (preguntaSiguiente === 2) {
             document.getElementById("tituloCategoria").textContent = "Categoría: Geografía";
