@@ -1,51 +1,63 @@
 function validarRespuesta(estado, respuesta, pregunta) {
-    let feedback = "";
-    var botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
+    const feedbackElement = document.getElementById("feedback");
+    const botonRespuestaSeleccionada = document.getElementById("respuesta" + respuesta);
+    const botones = document.querySelectorAll("#pregunta" + pregunta + " .btn");
 
-    // Limpiar las clases anteriores de todos los botones en la pregunta actual
-    var botones = document.querySelectorAll("#pregunta" + pregunta + " .btn");
-    botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
+    limpiarClasesAnteriores(botones);
+    actualizarRespuestaVisual(botonRespuestaSeleccionada, estado);
+    feedbackElement.textContent = estado === 1 ? "Correcto" : "Incorrecto";
 
-    // Añadir la clase correspondiente al botón seleccionado
-    if (estado === 1) {
-        botonRespuestaSeleccionada.classList.add("correcto");
-        feedback = "Correcto";
-    } else {
-        botonRespuestaSeleccionada.classList.add("incorrecto");
-        feedback = "Incorrecto";
-    }
-
-    document.getElementById("feedback").textContent = feedback;
     muestraPreguntaSiguiente(pregunta);
+}
+
+function limpiarClasesAnteriores(botones) {
+    botones.forEach(boton => boton.classList.remove("correcto", "incorrecto"));
+}
+
+function actualizarRespuestaVisual(boton, estado) {
+    if (estado === 1) {
+        boton.classList.add("correcto");
+    } else {
+        boton.classList.add("incorrecto");
+    }
 }
 
 function muestraPreguntaSiguiente(pregunta) {
     setTimeout(() => {
-        var preguntaSiguiente = pregunta + 1;
-
-        var header = document.getElementById("header");
-        
-        // Cambiar el número de la pregunta en el header
-        document.getElementById("numeroPregunta").textContent = "Pregunta número: " + preguntaSiguiente;
-
-        // Cambiar la categoría y el color del header
-        if (preguntaSiguiente === 2) {
-            document.getElementById("tituloCategoria").textContent = "Categoría: Geografía";
-            header.classList.remove("historia", "arte");
-            header.classList.add("geografia");
-        } else if (preguntaSiguiente === 3) {
-            document.getElementById("tituloCategoria").textContent = "Categoría: Arte y Literatura";
-            header.classList.remove("historia", "geografia");
-            header.classList.add("arte");
-        } else if (preguntaSiguiente === 4) {
-            document.getElementById("numeroPregunta").style.display = "none";
-            document.getElementById("tituloCategoria").textContent = "Fin";
-        }
-
-        // Ocultar la pregunta actual y mostrar la siguiente
-        document.getElementById("feedback").textContent = "";
-        document.getElementById("pregunta" + pregunta).style.display = "none";
-        document.getElementById("pregunta" + preguntaSiguiente).style.display = "block";
+        const preguntaSiguiente = pregunta + 1;
+        actualizarEncabezado(preguntaSiguiente);
+        cambiarPreguntaVisible(pregunta, preguntaSiguiente);
     }, 5000);
 }
+
+function actualizarEncabezado(preguntaSiguiente) {
+    const header = document.getElementById("header");
+    const numeroPreguntaElement = document.getElementById("numeroPregunta");
+    const tituloCategoriaElement = document.getElementById("tituloCategoria");
+
+    numeroPreguntaElement.textContent = "Pregunta número: " + preguntaSiguiente;
+
+    if (preguntaSiguiente === 2) {
+        tituloCategoriaElement.textContent = "Categoría: Geografía";
+        actualizarClaseHeader(header, ["historia", "arte"], "geografia");
+    } else if (preguntaSiguiente === 3) {
+        tituloCategoriaElement.textContent = "Categoría: Arte y Literatura";
+        actualizarClaseHeader(header, ["historia", "geografia"], "arte");
+    } else if (preguntaSiguiente === 4) {
+        numeroPreguntaElement.style.display = "none";
+        tituloCategoriaElement.textContent = "Fin";
+    }
+}
+
+function actualizarClaseHeader(header, clasesARemover, claseAgregar) {
+    header.classList.remove(...clasesARemover);
+    header.classList.add(claseAgregar);
+}
+
+function cambiarPreguntaVisible(preguntaActual, preguntaSiguiente) {
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("pregunta" + preguntaActual).style.display = "none";
+    document.getElementById("pregunta" + preguntaSiguiente).style.display = "block";
+}
+
 
